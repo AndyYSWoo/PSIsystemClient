@@ -1,25 +1,35 @@
 import javax.swing.*;
-
 import java.awt.event.*;
 import java.awt.*;
+import java.io.*;
+import java.net.*;
 
 
 public class LoginFrame extends JFrame{
 	JFrame loginFrame;
 	JPanel textPanel;
+	JLabel hintLabel;
 	JLabel roleLabel;
+	JTextField idField;
+	JPasswordField passwordField;
+	
 	JRadioButton stockRadioButton;
 	JRadioButton salesRadioButton;
 	JRadioButton financialRadioButton;
 	ButtonGroup userType;
-	JTextField idField;
-	JPasswordField passwordField;
 	JButton loginButton;
-	String loginMessage="StockStaff ";
+
+	String loginMessage="";
+	String staffType="StockStaff";
 	String userName=null;
 	String pw=null;
+	PrintWriter writer;
+	BufferedReader reader;
+	Socket socket;
+	String backMessage=null;
 	public static void main(String[] args){
 		LoginFrame loginFrame=new LoginFrame();
+		loginFrame.setUpNetworking();
 		
 	}
 	
@@ -48,7 +58,10 @@ public class LoginFrame extends JFrame{
 		textPanel=new JPanel();
 		textPanel.setSize(frameWidth,frameHeight*7/10);
 		textPanel.setLocation(0,0);
-		
+		hintLabel=new JLabel("");
+		hintLabel.setSize(frameWidth,frameHeight/10);
+		hintLabel.setLocation(frameWidth/3,0);
+		hintLabel.setVisible(true);
 		roleLabel=new JLabel("Identity: ");
 		roleLabel.setSize(frameWidth/5,frameHeight/10);
 		roleLabel.setLocation(frameWidth/8,frameHeight/10);
@@ -106,6 +119,7 @@ public class LoginFrame extends JFrame{
 		buttonPanel.setLayout(null);
 		buttonPanel.add(loginButton);
 		textPanel.setLayout(null);
+		textPanel.add(hintLabel);
 		textPanel.add(roleLabel);
 		textPanel.add(stockRadioButton);
 		textPanel.add(salesRadioButton);
@@ -118,6 +132,10 @@ public class LoginFrame extends JFrame{
 		loginFrame.add(buttonPanel);
 		loginFrame.add(textPanel);
 		loginFrame.repaint();
+		
+/*		Thread readerThread=new Thread(new IncomingReader());
+		readerThread.start();
+		*/
 	}
 	class MouseClickedID implements MouseListener{
 
@@ -143,7 +161,7 @@ public class LoginFrame extends JFrame{
 		public void itemStateChanged(ItemEvent e) {
 			JRadioButton jrb=(JRadioButton) e.getSource(); 
 			if(jrb.isSelected()){
-				loginMessage="StockStaff ";
+				staffType="StockStaff";
 			}
 		}
 		
@@ -154,7 +172,7 @@ public class LoginFrame extends JFrame{
 		public void itemStateChanged(ItemEvent e) {
 			JRadioButton jrb=(JRadioButton) e.getSource(); 
 			if(jrb.isSelected()){
-				loginMessage="SalesStaff ";
+				staffType="SalesStaff";
 				}
 			}
 		}
@@ -164,7 +182,7 @@ public class LoginFrame extends JFrame{
 		public void itemStateChanged(ItemEvent e) {
 			JRadioButton jrb=(JRadioButton) e.getSource(); 
 			if(jrb.isSelected()){
-				loginMessage="FinancialStaff ";
+				staffType="FinancialStaff";
 				}
 			}	
 		}
@@ -174,10 +192,52 @@ public class LoginFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			userName=idField.getText();
 			pw=String.valueOf(passwordField.getPassword());
-			loginMessage=loginMessage+userName+" "+pw;
-			System.out.println(loginMessage);
+			loginMessage=staffType+";"+userName+";"+pw;
+			try{
+				writer.println(loginMessage);
+				writer.flush();
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			try{
+				backMessage=reader.readLine();
+			}catch(Exception ex){ex.printStackTrace();}
+			
+			if(backMessage.equals("Success")){
+				System.out.println("Login successfully");
+				hintLabel.setText("Login successfully");
+				loginFrame.dispose();
+				if(staffType.equals("StockStaff")){
+					StockFrame stockFrame=new StockFrame();
+				}
+
+			}else{
+				System.out.println("Login failed,please try again");
+				hintLabel.setText("Login failed,please try again");
+			}
 		}
 		
 	}
+	public void setUpNetworking(){
+		try{
+			socket=new Socket("127.0.0.1",5000);
+			InputStreamReader streamReader=new InputStreamReader(socket.getInputStream());
+			reader=new BufferedReader(streamReader);
+			writer=new PrintWriter(socket.getOutputStream());
+			System.out.println("Networking established.");
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+/*	public class IncomingReader implements Runnable{
+		public void run(){
+
+			try{
+				
+				backMessage=reader.readLine();
+				}catch(Exception ex){ex.printStackTrace();}
+		}
+	}*/
 	
 	}
