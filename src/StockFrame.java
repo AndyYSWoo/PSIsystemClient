@@ -1,5 +1,4 @@
 import java.awt.*;
-
 import javax.swing.*;
 
 
@@ -16,7 +15,7 @@ public class StockFrame extends JFrame{
 	JButton shoCommodity;
 	JButton shoStock;
 	public StockFrame(){
-		stockFrame=new JFrame();
+		stockFrame=new JFrame("Stock Management");
 		Toolkit kit=Toolkit.getDefaultToolkit();
 		Dimension screenSize=kit.getScreenSize();
 		int screenWidth=screenSize.width;
@@ -25,10 +24,11 @@ public class StockFrame extends JFrame{
 		int frameHeight=frameWidth*3/4;
 		stockFrame.setBounds((screenWidth-frameWidth)/2,(screenHeight-frameHeight)/2,frameWidth,frameHeight);
 		stockFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		stockFrame.setResizable(false);
 		
 		choosePanel=new JPanel();
 		choosePanel.setBackground(Color.gray);
+		
 		commodityManagement=new JLabel("   Commodity");
 		commodityManagement.setVisible(true);
 
@@ -65,8 +65,8 @@ public class StockFrame extends JFrame{
 		stockFrame.setVisible(true);
 		stockFrame.repaint();
 	}
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		new StockFrame();
 	}
-	
+	*/
 }

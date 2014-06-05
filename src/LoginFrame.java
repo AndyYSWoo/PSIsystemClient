@@ -35,6 +35,7 @@ public class LoginFrame extends JFrame{
 	
 	public LoginFrame(){
 		loginFrame=new JFrame();
+		loginFrame.setResizable(false);
 		Toolkit kit=Toolkit.getDefaultToolkit();
 		Dimension screenSize=kit.getScreenSize();
 		int screenWidth=screenSize.width;
@@ -43,7 +44,7 @@ public class LoginFrame extends JFrame{
 		int frameHeight=0;
 		if(screenWidth*3>screenHeight*4){
 			frameHeight=screenHeight/2;
-			frameWidth=screenWidth*3/4;
+			frameWidth=(frameHeight+100)*4/3;
 		}
 		else{
 			frameWidth=screenWidth/2;
@@ -209,6 +210,10 @@ public class LoginFrame extends JFrame{
 				loginFrame.dispose();
 				if(staffType.equals("StockStaff")){
 					StockFrame stockFrame=new StockFrame();
+				}else if(staffType.equals("SalesStaff")){
+					SalesFrame salesFraem=new SalesFrame();
+				}else if(staffType.equals("FinancialStaff")){
+					FinancialFrame financialFrame=new FinancialFrame();
 				}
 
 			}else{
