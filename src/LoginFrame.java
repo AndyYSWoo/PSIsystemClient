@@ -21,7 +21,7 @@ public class LoginFrame extends JFrame{
 
 	String loginMessage="";
 	String staffType="StockStaff";
-	String userName=null;
+	public static String userName=null;
 	String pw=null;
 	PrintWriter writer;
 	BufferedReader reader;
