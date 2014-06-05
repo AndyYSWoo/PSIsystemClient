@@ -25,7 +25,6 @@ public class SalesFrame extends JFrame{
 	JTextField fromDateY;
 	JTextField fromDateM;
 	JTextField fromDateD;
-	
 	JTextField toDateY;
 	JTextField toDateM;
 	JTextField toDateD;
@@ -41,6 +40,21 @@ public class SalesFrame extends JFrame{
 	JTextField comMode4;
 	JTextField comAmount4;
 	JTextField comPrice4;
+	
+	JTextField fromDateY2;
+	JTextField fromDateM2;
+	JTextField fromDateD2;
+	JTextField toDateY2;
+	JTextField toDateM2;
+	JTextField toDateD2;
+	
+	JTextField cusName5;
+	JTextField phoneNum;
+	
+	JTextField cusName6;
+	
+	JTextField cusName7;
+	JTextField phoneNum2;
 	CardLayout card;
 	
 	public SalesFrame(){
@@ -85,6 +99,7 @@ public class SalesFrame extends JFrame{
 		delExport.addActionListener(new DelExListener());
 		delExport.setVisible(true);
 		JButton shoExport=new JButton("  Show  ");
+		shoExport.addActionListener(new ShoExListener());
 		shoExport.setVisible(true);
 		
 		JLabel divide2=new JLabel("==========");
@@ -92,10 +107,13 @@ public class SalesFrame extends JFrame{
 		
 		JLabel customerManagement=new JLabel("    Customer");
 		JButton addCustomer=new JButton("   Add   ");
+		addCustomer.addActionListener(new AddCusListener());
 		addCustomer.setVisible(true);
 		JButton delCustomer=new JButton("  Delete");
+		delCustomer.addActionListener(new DelCusListener());
 		delCustomer.setVisible(true);
 		JButton updCustomer=new JButton("  Update");
+		updCustomer.addActionListener(new UpdCusListener());
 		updCustomer.setVisible(true);
 		JButton finCustomer=new JButton("  Find    ");
 		finCustomer.setVisible(true);
@@ -128,7 +146,7 @@ public class SalesFrame extends JFrame{
 		JPanel welcome=new JPanel();
 		JLabel welcomelaLabel=new JLabel("Welcom To The Sales Management System, "+LoginFrame.userName);
 		welcomelaLabel.setVisible(true);
-		welcome.add(welcomelaLabel);
+		welcome.add(BorderLayout.NORTH,welcomelaLabel);
 		//===============AddImPanel====================================
 		JPanel addIm=new JPanel();
 		JLabel customerName=new JLabel("Customer's Name: ");
@@ -240,7 +258,7 @@ public class SalesFrame extends JFrame{
 		JLabel tdD=new JLabel("D");
 		tdD.setBounds(650,0,15,25);
 		JButton confirmSho=new JButton("Show");
-		confirmSho.addActionListener(new ConfirmShoListener());
+		confirmSho.addActionListener(new ConfirmShoImListener());
 		confirmSho.setBounds(700, 2, 150, 25);
 
 		
@@ -341,12 +359,130 @@ public class SalesFrame extends JFrame{
 		delEx.add(confirmDel2);
 		delEx.setLayout(null);
 		
+		//===============ShoExPanel=============================
+		JPanel shoEx=new JPanel();
+		JLabel fromDate2=new JLabel("From Date: ");
+		fromDate2.setBounds(50,0,100,25);
+		fromDateY2=new JTextField();
+		fromDateY2.setBounds(150,0,50,25);
+		JLabel fdY2=new JLabel("Y");
+		fdY2.setBounds(200,0,15,25);
+		fromDateM2=new JTextField();
+		fromDateM2.setBounds(215,0,35,25);
+		JLabel fdM2=new JLabel("M");
+		fdM2.setBounds(250,0,15,25);
+		fromDateD2=new JTextField();
+		fromDateD2.setBounds(265,0,35,25);
+		JLabel fdD2=new JLabel("D");
+		fdD2.setBounds(300,0,15,25);
+		
+		JLabel toDate2=new JLabel("To Date: ");
+		toDate2.setBounds(400,0,100,25);
+		toDateY2=new JTextField();
+		toDateY2.setBounds(500,0,50,25);
+		JLabel tdY2=new JLabel("Y");
+		tdY2.setBounds(550,0,15,25);
+		toDateM2=new JTextField();
+		toDateM2.setBounds(565,0,35,25);
+		JLabel tdM2=new JLabel("M");
+		tdM2.setBounds(600,0,15,25);
+		toDateD2=new JTextField();
+		toDateD2.setBounds(615,0,35,25);
+		JLabel tdD2=new JLabel("D");
+		tdD2.setBounds(650,0,15,25);
+		JButton confirmSho2=new JButton("Show");
+		confirmSho2.addActionListener(new ConfirmShoExListener());
+		confirmSho2.setBounds(700, 2, 150, 25);
+
+		
+		shoEx.add(fromDate2);
+		shoEx.add(fromDateY2);
+		shoEx.add(fdY2);
+		shoEx.add(fromDateM2);
+		shoEx.add(fdM2);
+		shoEx.add(fromDateD2);
+		shoEx.add(fdD2);
+		shoEx.add(toDate2);
+		shoEx.add(toDateY2);
+		shoEx.add(tdY2);
+		shoEx.add(toDateM2);
+		shoEx.add(tdM2);
+		shoEx.add(toDateD2);
+		shoEx.add(tdD2);
+		shoEx.add(confirmSho2);
+		shoEx.setLayout(null);
+		
+		//===============AddCustomer=============================
+		JPanel addCus=new JPanel();
+		JLabel customerName5=new JLabel("Customer's Name: ");
+		customerName5.setBounds(50,0,125,25);
+		cusName5=new JTextField();
+		cusName5.setBounds(175,0,150,25);
+		JLabel phone=new JLabel("Phone Number: ");
+		phone.setBounds(400,0,100,25);
+		phoneNum=new JTextField();
+		phoneNum.setBounds(500,0,150,25);
+		JButton confirmAddCus=new JButton("Add");
+		confirmAddCus.addActionListener(new ConfirmAddCusListener());
+		confirmAddCus.setBounds(700, 2, 150, 25);
+
+		
+		addCus.add(customerName5);
+		addCus.add(cusName5);
+		addCus.add(phone);
+		addCus.add(phoneNum);
+		addCus.add(confirmAddCus);
+		addCus.setLayout(null);
+		
+		//===============DelCustomer=============================
+		JPanel delCus=new JPanel();
+		JLabel customerName6=new JLabel("Customer's Name: ");
+		customerName6.setBounds(50,0,125,25);
+		cusName6=new JTextField();
+		cusName6.setBounds(175,0,150,25);
+
+		JButton confirmDelCus=new JButton("Delete");
+		confirmDelCus.addActionListener(new ConfirmDelCusListener());
+		confirmDelCus.setBounds(700, 2, 150, 25);
+
+		
+		delCus.add(customerName6);
+		delCus.add(cusName6);
+		delCus.add(confirmDelCus);
+		delCus.setLayout(null);
+		
+		//===============UpdCustomer=============================
+		JPanel updCus=new JPanel();
+		JLabel customerName7=new JLabel("Customer's Name: ");
+		customerName7.setBounds(50,0,125,25);
+		cusName7=new JTextField();
+		cusName7.setBounds(175,0,150,25);
+		JLabel phone2=new JLabel("Phone Number: ");
+		phone2.setBounds(400,0,100,25);
+		phoneNum2=new JTextField();
+		phoneNum2.setBounds(500,0,150,25);
+		JButton confirmUpdCus=new JButton("Update");
+		confirmUpdCus.addActionListener(new ConfirmUpdCusListener());
+		confirmUpdCus.setBounds(700, 2, 150, 25);
+
+		
+		updCus.add(customerName7);
+		updCus.add(cusName7);
+		updCus.add(phone2);
+		updCus.add(phoneNum2);
+		updCus.add(confirmUpdCus);
+		updCus.setLayout(null);
+		
 		contentPanel.add("Welcome",welcome);
 		contentPanel.add("AddImport",addIm);
 		contentPanel.add("DelImport",delIm);
 		contentPanel.add("ShoImport",shoIm);
 		contentPanel.add("AddExport",addEx);
 		contentPanel.add("DelExport",delEx);
+		contentPanel.add("ShoExport",shoEx);
+		contentPanel.add("AddCustomer",addCus);
+		contentPanel.add("DelCustomer",delCus);
+		contentPanel.add("UpdCustomer",updCus);
 		contentPanel.setVisible(true);
 		
 		salesFrame.add(BorderLayout.WEST,choosePanel);
@@ -401,7 +537,7 @@ public class SalesFrame extends JFrame{
 		}
 		
 	}
-	class ConfirmShoListener implements ActionListener{
+	class ConfirmShoImListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -452,8 +588,86 @@ public class SalesFrame extends JFrame{
 		
 	}
 	
+	class ShoExListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			card.show(contentPanel, "ShoExport");
+		}
+		
+	}
+	class ConfirmShoExListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String message;
+			message="EXPORT_SHO:"+fromDateY2.getText()+"/"+fromDateM2.getText()+"/"+fromDateD2.getText()+";"+toDateY2.getText()+"/"+toDateM2.getText()+"/"+toDateD2.getText();
+			System.out.println(message);
+		}
+		
+	}
+	class AddCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			card.show(contentPanel, "AddCustomer");
+		}
+		
+	}
+	class ConfirmAddCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			String message;
+			message="CUSTOMER_ADD:"+cusName5.getText()+";"+phoneNum.getText();
+			System.out.println(message);
+		}
+		
+	}
+	
+	class DelCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			card.show(contentPanel, "DelCustomer");
+		}
+		
+	}
+	
+	class ConfirmDelCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String message;
+			message="CUSTOMER_DEL:"+cusName6.getText();
+			System.out.println(message);
+		}
+		
+	}
+	
+	class UpdCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			card.show(contentPanel, "UpdCustomer");
+		}
+		
+	}
+	class ConfirmUpdCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String message;
+			message="CUSTOMER_UPD:"+cusName7.getText()+";"+phoneNum2.getText();
+			System.out.println(message);
+			
+		}
+		
+	}
+	
 	public static void main(String[] args){
 		new SalesFrame();
 	}
 	
 }
+
