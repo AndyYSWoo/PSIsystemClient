@@ -55,6 +55,8 @@ public class SalesFrame extends JFrame{
 	
 	JTextField cusName7;
 	JTextField phoneNum2;
+	
+	JTextField cusName8;
 	CardLayout card;
 	
 	public SalesFrame(){
@@ -116,8 +118,10 @@ public class SalesFrame extends JFrame{
 		updCustomer.addActionListener(new UpdCusListener());
 		updCustomer.setVisible(true);
 		JButton finCustomer=new JButton("  Find    ");
+		finCustomer.addActionListener(new FinCusListener());
 		finCustomer.setVisible(true);
 		JButton shoCustomer=new JButton("  Show  ");
+		shoCustomer.addActionListener(new ShoCusListener());
 		shoCustomer.setVisible(true);
 		
 		choosePanel.add(importManagement);
@@ -186,6 +190,7 @@ public class SalesFrame extends JFrame{
 		addIm.add(comPrice);
 		addIm.add(confirmAdd);
 		addIm.setLayout(null);
+				
 		
 		//===============DELImpanel=============================
 		JPanel delIm=new JPanel();
@@ -465,7 +470,6 @@ public class SalesFrame extends JFrame{
 		confirmUpdCus.addActionListener(new ConfirmUpdCusListener());
 		confirmUpdCus.setBounds(700, 2, 150, 25);
 
-		
 		updCus.add(customerName7);
 		updCus.add(cusName7);
 		updCus.add(phone2);
@@ -473,6 +477,34 @@ public class SalesFrame extends JFrame{
 		updCus.add(confirmUpdCus);
 		updCus.setLayout(null);
 		
+		//===============FinCustomer=============================
+		JPanel finCus=new JPanel();
+		JLabel customerName8=new JLabel("Customer's Name: ");
+		customerName8.setBounds(50,0,125,25);
+		cusName8=new JTextField();
+		cusName8.setBounds(175,0,150,25);
+		JButton confirmFinCus=new JButton("Find");
+		confirmFinCus.addActionListener(new ConfirmFinCusListener());
+		confirmFinCus.setBounds(700, 2, 150, 25);
+		
+		
+		finCus.add(customerName8);
+		finCus.add(cusName8);
+		finCus.add(confirmFinCus);
+		finCus.setLayout(null);
+		finCus.setVisible(true);
+		
+		//===============ShoCustomer=============================
+		JPanel shoCus=new JPanel();
+		JButton confirmShoCus=new JButton("Show");
+		confirmShoCus.addActionListener(new ConfirmShoCusListener());
+		confirmShoCus.setBounds(300, 2, 150, 25);
+		
+		shoCus.add(confirmShoCus);
+		shoCus.setLayout(null);
+		shoCus.setVisible(true);
+		
+		//===============Set The Card=============================
 		contentPanel.add("Welcome",welcome);
 		contentPanel.add("AddImport",addIm);
 		contentPanel.add("DelImport",delIm);
@@ -483,7 +515,10 @@ public class SalesFrame extends JFrame{
 		contentPanel.add("AddCustomer",addCus);
 		contentPanel.add("DelCustomer",delCus);
 		contentPanel.add("UpdCustomer",updCus);
+		contentPanel.add("FinCustomer",finCus);
+		contentPanel.add("ShoCustomer",shoCus);
 		contentPanel.setVisible(true);
+
 		
 		salesFrame.add(BorderLayout.WEST,choosePanel);
 		salesFrame.add(BorderLayout.CENTER,contentPanel);
@@ -660,14 +695,46 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="CUSTOMER_UPD:"+cusName7.getText()+";"+phoneNum2.getText();
 			System.out.println(message);
-			
-		}
-		
+		}		
 	}
+	
+	class FinCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			card.show(contentPanel, "FinCustomer");	
+		}		
+	}
+	class ConfirmFinCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String message;
+			message="CUSTOMER_FIN:"+cusName8.getText();
+			System.out.println(message);
+		}
+	}
+	
+	class ShoCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			card.show(contentPanel, "ShoCustomer");
+		}
+	}
+	
 	
 	public static void main(String[] args){
 		new SalesFrame();
 	}
-	
+	class ConfirmShoCusListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String message;
+			message="CUSTOMER_SHO:";
+			System.out.println(message);
+		}		
+	}
 }
 
