@@ -723,10 +723,6 @@ public class SalesFrame extends JFrame{
 		}
 	}
 	
-	
-	public static void main(String[] args){
-		new SalesFrame();
-	}
 	class ConfirmShoCusListener implements ActionListener{
 
 		@Override
