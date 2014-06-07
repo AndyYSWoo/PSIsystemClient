@@ -1,6 +1,11 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 import javax.swing.*;
 
 
@@ -26,8 +31,13 @@ public class StockFrame extends JFrame{
 	
 	JTextField comName4;
 	JTextField comMode4;
+	
+	JLabel addComNoteLabel;
+	JLabel delComNoteLabel;
+	JLabel updComNoteLabel;
 
 	public StockFrame(){
+		
 		
 		//================Set the frame=========================
 		stockFrame=new JFrame("Stock Management");
@@ -116,6 +126,9 @@ public class StockFrame extends JFrame{
 		confirmAdd.addActionListener(new ConfirmAddComListener());
 		confirmAdd.setBounds(300,100,150,25);
 		confirmAdd.setVisible(true);
+		addComNoteLabel=new JLabel();
+		addComNoteLabel.setBounds(350,125,150,25);
+		addComNoteLabel.setVisible(true);
 
 
 		addCom.add(commodityName);
@@ -127,6 +140,7 @@ public class StockFrame extends JFrame{
 		addCom.add(commodityDOP);
 		addCom.add(comDOP);
 		addCom.add(confirmAdd);
+		addCom.add(addComNoteLabel);
 		addCom.setLayout(null);
 		
 		//===============DelComPanel====================================
@@ -144,6 +158,9 @@ public class StockFrame extends JFrame{
 		confirmDel.addActionListener(new ConfirmDelComListener());
 		confirmDel.setBounds(300,100,150,25);
 		confirmDel.setVisible(true);
+		delComNoteLabel=new JLabel();
+		delComNoteLabel.setBounds(350,125,150,25);
+		delComNoteLabel.setVisible(true);
 
 
 		delCom.add(commodityName2);
@@ -151,6 +168,7 @@ public class StockFrame extends JFrame{
 		delCom.add(commodityMode2);
 		delCom.add(comMode2);
 		delCom.add(confirmDel);
+		delCom.add(delComNoteLabel);
 		delCom.setLayout(null);
 		
 		//===============UpdComPanel====================================
@@ -175,6 +193,9 @@ public class StockFrame extends JFrame{
 		confirmUpd.addActionListener(new ConfirmUpdComListener());
 		confirmUpd.setBounds(300,100,150,25);
 		confirmUpd.setVisible(true);
+		updComNoteLabel=new JLabel();
+		updComNoteLabel.setBounds(350,125,150,25);
+		updComNoteLabel.setVisible(true);
 
 
 		updCom.add(commodityName3);
@@ -186,6 +207,7 @@ public class StockFrame extends JFrame{
 		updCom.add(commodityDOP2);
 		updCom.add(comDOP2);
 		updCom.add(confirmUpd);
+		updCom.add(updComNoteLabel);
 		updCom.setLayout(null);
 		
 		//===============FinComPanel====================================
@@ -260,6 +282,14 @@ public class StockFrame extends JFrame{
 			String message;
 			message="COMMODITY_ADD:"+comName.getText()+";"+comMode.getText()+";"+comDIP.getText()+";"+comDOP.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				addComNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -275,7 +305,16 @@ public class StockFrame extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			String message;
 			message="COMMODITY_DEL:"+comName2.getText()+";"+comMode2.getText();
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 			System.out.println(message);
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				delComNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
 		}
 	}
 	
@@ -292,6 +331,14 @@ public class StockFrame extends JFrame{
 			String message;
 			message="COMMODITY_UPD:"+comName3.getText()+";"+comMode3.getText()+";"+comDIP2.getText()+";"+comDOP2.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				updComNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -310,6 +357,8 @@ public class StockFrame extends JFrame{
 			String message;
 			message="COMMODITY_FIN:"+comName4.getText()+";"+comMode4.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 		
 	}
@@ -329,6 +378,8 @@ public class StockFrame extends JFrame{
 			String message;
 			message="COMMODITY_SHO:";
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 		
 	}
@@ -348,6 +399,8 @@ public class StockFrame extends JFrame{
 			String message;
 			message="STOCK_SHO:";
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 		
 	}

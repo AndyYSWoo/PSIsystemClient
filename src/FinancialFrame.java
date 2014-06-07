@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class FinancialFrame extends JFrame{
@@ -16,8 +18,10 @@ public class FinancialFrame extends JFrame{
 	
 	JTextField cusName2;
 	JTextField outAmount;
-
-
+	
+	JLabel iniAccNoteLabel;
+	JLabel inAccNoteLabel;
+	JLabel outAccNoteLabel;
 
 
 	public FinancialFrame() {
@@ -82,9 +86,13 @@ public class FinancialFrame extends JFrame{
 		JButton confirmIniAcc=new JButton("Initialize");
 		confirmIniAcc.addActionListener(new ConfirmIniAccListener());
 		confirmIniAcc.setBounds(700, 2, 150, 25);
+		iniAccNoteLabel=new JLabel();
+		iniAccNoteLabel.setBounds(750, 27, 150, 25);
+		iniAccNoteLabel.setVisible(true);
 		iniAcc.add(initialAmount);
 		iniAcc.add(iniAmount);
 		iniAcc.add(confirmIniAcc);
+		iniAcc.add(iniAccNoteLabel);
 		iniAcc.setLayout(null);
 		iniAcc.setVisible(true);
 	
@@ -101,11 +109,15 @@ public class FinancialFrame extends JFrame{
 		JButton confirmAccIn=new JButton("Account In");
 		confirmAccIn.addActionListener(new ConfirmAccInListener());
 		confirmAccIn.setBounds(700, 2, 150, 25);
+		inAccNoteLabel=new JLabel();
+		inAccNoteLabel.setBounds(750, 27, 150, 25);
+		inAccNoteLabel.setVisible(true);
 		accIn.add(customerName);
 		accIn.add(cusName);
 		accIn.add(inAmo);
 		accIn.add(inAmount);
 		accIn.add(confirmAccIn);
+		accIn.add(inAccNoteLabel);
 		accIn.setLayout(null);
 		
 		//===============AccOut=============================
@@ -121,11 +133,15 @@ public class FinancialFrame extends JFrame{
 		JButton confirmAccOut=new JButton("Account Out");
 		confirmAccOut.addActionListener(new ConfirmAccOutListener());
 		confirmAccOut.setBounds(700, 2, 150, 25);
+		outAccNoteLabel=new JLabel();
+		outAccNoteLabel.setBounds(750, 27, 150, 25);
+		outAccNoteLabel.setVisible(true);
 		accOut.add(customerName2);
 		accOut.add(cusName2);
 		accOut.add(outAmo);
 		accOut.add(outAmount);
 		accOut.add(confirmAccOut);
+		accOut.add(outAccNoteLabel);
 		accOut.setLayout(null);
 		
 		//===============AllAccount=============================
@@ -174,6 +190,14 @@ public class FinancialFrame extends JFrame{
 			String message;
 			message="ACCOUNT_INI:"+iniAmount.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				iniAccNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -192,6 +216,14 @@ public class FinancialFrame extends JFrame{
 			String message;
 			message="ACCOUNT_IN:"+cusName.getText()+";"+inAmount.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				inAccNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -209,6 +241,14 @@ public class FinancialFrame extends JFrame{
 			String message;
 			message="ACCOUNT_OUT:"+cusName2.getText()+";"+outAmount.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				outAccNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -227,6 +267,8 @@ public class FinancialFrame extends JFrame{
 			String message;
 			message="ACCOUNT_ALL:";
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 		
 	}
@@ -246,6 +288,8 @@ public class FinancialFrame extends JFrame{
 			String message;
 			message="ACCOUNT_DET:";
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 		
 	}

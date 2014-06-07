@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 public class SalesFrame extends JFrame{
@@ -58,6 +59,14 @@ public class SalesFrame extends JFrame{
 	
 	JTextField cusName8;
 	CardLayout card;
+	
+	JLabel addImNoteLabel;
+	JLabel delImNoteLabel;
+	JLabel addExNoteLabel;
+	JLabel delExNoteLabel;
+	JLabel addCusNoteLabel;
+	JLabel delCusNoteLabel;
+	JLabel updCusNoteLabel;
 	
 	public SalesFrame(){
 		
@@ -177,7 +186,9 @@ public class SalesFrame extends JFrame{
 		confirmAdd.addActionListener(new ConfirmAddImListener());
 		confirmAdd.setBounds(300,100,150,25);
 		confirmAdd.setVisible(true);
-
+		addImNoteLabel=new JLabel();
+		addImNoteLabel.setBounds(350,125,150,25);
+		addImNoteLabel.setVisible(true);
 		addIm.add(customerName);
 		addIm.add(cusName);
 		addIm.add(commodityName);
@@ -189,6 +200,7 @@ public class SalesFrame extends JFrame{
 		addIm.add(commodityPrice);
 		addIm.add(comPrice);
 		addIm.add(confirmAdd);
+		addIm.add(addImNoteLabel);
 		addIm.setLayout(null);
 				
 		
@@ -218,7 +230,9 @@ public class SalesFrame extends JFrame{
 		confirmDel.addActionListener(new ConfirmDelImListener());
 		confirmDel.setBounds(300,100,150,25);
 		confirmDel.setVisible(true);
-
+		delImNoteLabel=new JLabel();
+		delImNoteLabel.setBounds(350,125,150,25);
+		delImNoteLabel.setVisible(true);
 		delIm.add(customerName2);
 		delIm.add(cusName2);
 		delIm.add(commodityName2);
@@ -229,6 +243,7 @@ public class SalesFrame extends JFrame{
 		delIm.add(comAmount2);
 		delIm.add(commodityPrice2);
 		delIm.add(comPrice2);
+		delIm.add(delImNoteLabel);
 		delIm.add(confirmDel);
 		delIm.setLayout(null);
 		//===============ShoImPanel=============================
@@ -310,7 +325,8 @@ public class SalesFrame extends JFrame{
 		confirmAdd1.addActionListener(new ConfirmAddExListener());
 		confirmAdd1.setBounds(300,100,150,25);
 		confirmAdd1.setVisible(true);
-
+		addExNoteLabel=new JLabel();
+		addExNoteLabel.setBounds(350,125,150,25);
 		addEx.add(customerName3);
 		addEx.add(cusName3);
 		addEx.add(commodityName3);
@@ -322,6 +338,7 @@ public class SalesFrame extends JFrame{
 		addEx.add(commodityPrice3);
 		addEx.add(comPrice3);
 		addEx.add(confirmAdd1);
+		addEx.add(addExNoteLabel);
 		addEx.setLayout(null);
 		
 		//===============DELExpanel=============================
@@ -350,6 +367,8 @@ public class SalesFrame extends JFrame{
 		confirmDel2.addActionListener(new ConfirmDelExListener());
 		confirmDel2.setBounds(300,100,150,25);
 		confirmDel2.setVisible(true);
+		delExNoteLabel=new JLabel();
+		delExNoteLabel.setBounds(350,125,150,25);
 
 		delEx.add(customerName4);
 		delEx.add(cusName4);
@@ -362,6 +381,7 @@ public class SalesFrame extends JFrame{
 		delEx.add(commodityPrice4);
 		delEx.add(comPrice4);
 		delEx.add(confirmDel2);
+		delEx.add(delExNoteLabel);
 		delEx.setLayout(null);
 		
 		//===============ShoExPanel=============================
@@ -430,6 +450,8 @@ public class SalesFrame extends JFrame{
 		JButton confirmAddCus=new JButton("Add");
 		confirmAddCus.addActionListener(new ConfirmAddCusListener());
 		confirmAddCus.setBounds(700, 2, 150, 25);
+		addCusNoteLabel=new JLabel();
+		addCusNoteLabel.setBounds(750, 27, 150, 25);
 
 		
 		addCus.add(customerName5);
@@ -437,6 +459,7 @@ public class SalesFrame extends JFrame{
 		addCus.add(phone);
 		addCus.add(phoneNum);
 		addCus.add(confirmAddCus);
+		addCus.add(addCusNoteLabel);
 		addCus.setLayout(null);
 		
 		//===============DelCustomer=============================
@@ -445,15 +468,17 @@ public class SalesFrame extends JFrame{
 		customerName6.setBounds(50,0,125,25);
 		cusName6=new JTextField();
 		cusName6.setBounds(175,0,150,25);
-
 		JButton confirmDelCus=new JButton("Delete");
 		confirmDelCus.addActionListener(new ConfirmDelCusListener());
 		confirmDelCus.setBounds(700, 2, 150, 25);
-
+		delCusNoteLabel=new JLabel();
+		delCusNoteLabel.setBounds(750, 27, 150, 25);
+		delCusNoteLabel.setVisible(true);
 		
 		delCus.add(customerName6);
 		delCus.add(cusName6);
 		delCus.add(confirmDelCus);
+		delCus.add(delCusNoteLabel);
 		delCus.setLayout(null);
 		
 		//===============UpdCustomer=============================
@@ -469,12 +494,15 @@ public class SalesFrame extends JFrame{
 		JButton confirmUpdCus=new JButton("Update");
 		confirmUpdCus.addActionListener(new ConfirmUpdCusListener());
 		confirmUpdCus.setBounds(700, 2, 150, 25);
-
+		updCusNoteLabel=new JLabel();
+		updCusNoteLabel.setBounds(750, 27, 150, 25);
+		updCusNoteLabel.setVisible(true);
 		updCus.add(customerName7);
 		updCus.add(cusName7);
 		updCus.add(phone2);
 		updCus.add(phoneNum2);
 		updCus.add(confirmUpdCus);
+		updCus.add(updCusNoteLabel);
 		updCus.setLayout(null);
 		
 		//===============FinCustomer=============================
@@ -541,6 +569,14 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="IMPORT_ADD:"+cusName.getText()+";"+comName.getText()+";"+comMode.getText()+";"+comAmount.getText()+";"+comPrice.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				addImNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -560,6 +596,14 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="IMPORT_DEL:"+cusName2.getText()+";"+comName2.getText()+";"+comMode2.getText()+";"+comAmount2.getText()+";"+comPrice2.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				delImNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -579,6 +623,8 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="IMPORT_SHO:"+fromDateY.getText()+"/"+fromDateM.getText()+"/"+fromDateD.getText()+";"+toDateY.getText()+"/"+toDateM.getText()+"/"+toDateD.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 		
 	}
@@ -599,6 +645,14 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="EXPORT_ADD:"+cusName3.getText()+";"+comName3.getText()+";"+comMode3.getText()+";"+comAmount3.getText()+";"+comPrice3.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				addExNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -618,7 +672,14 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="EXPORT_DEL:"+cusName4.getText()+";"+comName4.getText()+";"+comMode4.getText()+";"+comAmount4.getText()+";"+comPrice4.getText();
 			System.out.println(message);
-	
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				delExNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -638,6 +699,8 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="EXPORT_SHO:"+fromDateY2.getText()+"/"+fromDateM2.getText()+"/"+fromDateD2.getText()+";"+toDateY2.getText()+"/"+toDateM2.getText()+"/"+toDateD2.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 		
 	}
@@ -656,6 +719,14 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="CUSTOMER_ADD:"+cusName5.getText()+";"+phoneNum.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				addCusNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -676,6 +747,14 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="CUSTOMER_DEL:"+cusName6.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				delCusNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -695,6 +774,14 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="CUSTOMER_UPD:"+cusName7.getText()+";"+phoneNum2.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
+			try {
+				System.out.println(LoginFrame.reader.readLine());
+				updCusNoteLabel.setText(LoginFrame.reader.readLine());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}		
 	}
 	
@@ -712,6 +799,8 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="CUSTOMER_FIN:"+cusName8.getText();
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}
 	}
 	
@@ -730,6 +819,8 @@ public class SalesFrame extends JFrame{
 			String message;
 			message="CUSTOMER_SHO:";
 			System.out.println(message);
+			LoginFrame.writer.println(message);
+			LoginFrame.writer.flush();
 		}		
 	}
 }

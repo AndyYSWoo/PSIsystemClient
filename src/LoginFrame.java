@@ -6,6 +6,11 @@ import java.net.*;
 
 
 public class LoginFrame extends JFrame{
+	public static BufferedReader reader;
+	public static PrintWriter writer;
+	public static Socket socket;
+	public static String backMessage=null;
+	
 	JFrame loginFrame;
 	JPanel textPanel;
 	JLabel hintLabel;
@@ -23,10 +28,8 @@ public class LoginFrame extends JFrame{
 	String staffType="StockStaff";
 	public static String userName=null;
 	String pw=null;
-	PrintWriter writer;
-	BufferedReader reader;
-	Socket socket;
-	String backMessage=null;
+
+
 	public static void main(String[] args){
 		LoginFrame loginFrame=new LoginFrame();
 		loginFrame.setUpNetworking();
@@ -193,7 +196,7 @@ public class LoginFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			userName=idField.getText();
 			pw=String.valueOf(passwordField.getPassword());
-			loginMessage=staffType+";"+userName+";"+pw;
+			loginMessage=staffType+":"+userName+":"+pw;
 			try{
 				writer.println(loginMessage);
 				writer.flush();
@@ -211,7 +214,7 @@ public class LoginFrame extends JFrame{
 				if(staffType.equals("StockStaff")){
 					StockFrame stockFrame=new StockFrame();
 				}else if(staffType.equals("SalesStaff")){
-					SalesFrame salesFraem=new SalesFrame();
+					SalesFrame salesFrame=new SalesFrame();
 				}else if(staffType.equals("FinancialStaff")){
 					FinancialFrame financialFrame=new FinancialFrame();
 				}
